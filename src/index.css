@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --Navy: #071952;
+    --Cyan1: #088395;
+    --Cyan2: #37b7c3;
+    --CyanHover: #0fa3b1;
+    --White: #fff;
+    --White2: #ebf4f6;
+    --NavyDark: #040714;
+    --Gold: #f5c77a;
+    --TextPrimary: #0f172a;
+    --TextSecondary: #64748b;
+    --Textmuted: #94a3b8;
+    --Danger: #e5533d;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--NavyDark);
+    color: var(--White);
+  }
+}
