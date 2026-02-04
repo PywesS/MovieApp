@@ -31,7 +31,9 @@ function Header() {
       {/* Header Up */}
       <div className="w-full flex items-center justify-between bg-slate-950/80 backdrop-blur-md border-b border-white/5 p-7 md:py-5 md:px-10 lg:px-25">
         <div>
-          <h2 className="text-cyan-400 font-bold text-2xl mr-3">Logo</h2>
+          <h2 className="text-white font-bold text-2xl mr-3">
+            Cine<span className="text-cyan-400">Vault</span>
+          </h2>
         </div>
         <nav className="hidden md:flex items-center justify-center gap-4">
           {navMenus.map((item) => (
