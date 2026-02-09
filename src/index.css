@@ -1,21 +1,6 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @layer base {
-  :root {
-    --Navy: #071952;
-    --Cyan1: #088395;
-    --Cyan2: #37b7c3;
-    --CyanHover: #0fa3b1;
-    --White: #fff;
-    --White2: #ebf4f6;
-    --NavyDark: #040714;
-    --Gold: #f5c77a;
-    --TextPrimary: #0f172a;
-    --TextSecondary: #64748b;
-    --Textmuted: #94a3b8;
-    --Danger: #e5533d;
-  }
-
   * {
     margin: 0;
     padding: 0;
@@ -25,9 +10,10 @@
   }
 
   body {
-    background-color: var(--NavyDark);
+    background-color: #0b0b0b;
   }
 }
+
 
 .swiper-pagination {
   bottom: 1.5rem !important;
@@ -40,6 +26,6 @@
 }
 
 .swiper-pagination-bullet-active {
-  background: #008BFF !important;
+  background: #008bff !important;
   width: 35px !important;
 }

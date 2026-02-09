@@ -41,21 +41,23 @@ export const getMovieCastById = createAsyncThunk(
   },
 );
 
+
+
 export const MovieSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getPopularMovies.fulfilled, (state, action) => {
-      console.log(action.payload);
+      console.log(action.payload)
       state.popularMovies = action.payload.results;
     });
 
     builder.addCase(getMovieCastById.fulfilled, (state, action) => {
       const { movieId, cast } = action.payload;
-      console.log(movieId,cast)
       state.movieCasts[movieId] = cast;
     });
+
   },
 });
 

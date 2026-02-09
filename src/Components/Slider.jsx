@@ -61,7 +61,7 @@ function Slider() {
   -translate-x-1/2 
   -translate-y-1/2 z-20  flex flex-col items-center justify-center xl:items-baseline xl:top-80 xl:left-45 xl:translate-0"
             >
-              <h1 className="text-4xl md:text-7xl text-[#008BFF] drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)] font-[Cinzel] tracking-wide">
+              <h1 className="w-[70%] text-center xl:text-left text-4xl md:text-7xl text-[#008BFF] drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)] font-[Cinzel] tracking-wide">
                 {movie.title}
               </h1>
               <div
@@ -76,7 +76,7 @@ function Slider() {
                   <h3 className="text-[#008BFF]">Cast:</h3>
                   {movieCasts[movie.id]?.slice(0, 4).map((star, index) => {
                     return (
-                      <span className="text-lg">
+                      <span key={index} className="text-lg">
                         {star.name} {index !== 3 && ", "}
                       </span>
                     );

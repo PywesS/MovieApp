@@ -40,7 +40,7 @@ function Header() {
             {navMenus.map((item) => (
               <NavItems key={item.name} name={item.name} />
             ))}
-          </nav>
+          </nav> 
         </div>
 
         <div className="relative flex items-center ">
