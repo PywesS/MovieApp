@@ -1,34 +1,30 @@
-import React, { useEffect, useRef } from "react";
+import { React, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
-
-import { Navigation } from "swiper/modules";
-
-import "swiper/css";
 import { useDispatch, useSelector } from "react-redux";
-import { getPopularMovies } from "../Redux/MovieSlice";
-
+import { getComingSoonMovies } from "../Redux/MovieSlice";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
 import CardSlider from "./CardSlider";
 
-function TrendingMovies() {
-  const { popularMovies } = useSelector((state) => state.Movies);
+function ComingSoon() {
+  const { ComingSoonMovies } = useSelector((state) => state.Movies);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPopularMovies());
+    dispatch(getComingSoonMovies());
   }, []);
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <section id="trendMovies" className="w-full mt-20">
-      {/* Title and Buttons */}
+    <section id="comingSoonMovies" className="w-full mt-20">
       <div className="w-[85%] mx-auto flex  justify-between gap-6">
         <div className="w-full">
           <h2 className="w-50 xl:w-full text-white text-lg md:text-xl lg:text-3xl xl:text-3.5xl font-extrabold">
-            Trending Movies
+            Coming Soon
           </h2>
           <p className="text-gray-400 text-xs lg:text-lg">
-            Discover the most watched movies of the week.
+            The movies everyone will talk about.
           </p>
         </div>
         <div className="w-full flex items-center justify-end gap-4">
@@ -46,8 +42,6 @@ function TrendingMovies() {
           </button>
         </div>
       </div>
-
-      {/* Card Slider */}
       <div className="w-[85%] mx-auto mt-10 mb-20">
         <Swiper
           spaceBetween={30}
@@ -58,7 +52,7 @@ function TrendingMovies() {
             swiper.params.navigation.nextEl = nextRef.current;
           }}
         >
-          {popularMovies.map((movie) => (
+          {ComingSoonMovies.map((movie) => (
             <SwiperSlide key={movie.id} className="!w-[240px] md:!w-[270px] ">
               <CardSlider movieInfo={movie} />
             </SwiperSlide>
@@ -69,4 +63,4 @@ function TrendingMovies() {
   );
 }
 
-export default TrendingMovies;
+export default ComingSoon;

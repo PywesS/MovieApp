@@ -4,9 +4,9 @@ import axios from "axios";
 const initialState = {
   allMovies: [],
   trendingMovies: [],
+  ComingSoonMovies: [],
   popularMovies: [],
   topratedMovies: [],
-  shows: [],
   movieCasts: {},
 };
 
@@ -14,7 +14,7 @@ export const getPopularMovies = createAsyncThunk(
   "getPopularMovies",
   async () => {
     const response = await axios.get(
-      "https://api.themoviedb.org/3/trending/movie/week?&page=1",
+      "https://api.themoviedb.org/3/trending/movie/week?&page=2",
       {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
@@ -41,7 +41,21 @@ export const getMovieCastById = createAsyncThunk(
   },
 );
 
+export const getComingSoonMovies = createAsyncThunk(
+  "getComingSoonMovies",
+  async () => {
+    const response = await axios.get(
+      "https://api.themoviedb.org/3/movie/upcoming?page=3",
+      {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+        },
+      },
+    );
 
+    return response.data.results;
+  },
+);
 
 export const MovieSlice = createSlice({
   name: "movies",
@@ -49,7 +63,7 @@ export const MovieSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getPopularMovies.fulfilled, (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload.results);
       state.popularMovies = action.payload.results;
     });
 
@@ -58,6 +72,9 @@ export const MovieSlice = createSlice({
       state.movieCasts[movieId] = cast;
     });
 
+    builder.addCase(getComingSoonMovies.fulfilled, (state, action) => {
+      state.ComingSoonMovies = action.payload;
+    });
   },
 });
 
