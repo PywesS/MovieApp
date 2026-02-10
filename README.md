@@ -34,7 +34,7 @@
 👤 Author
 PywesS
 Frontend Developer
-📌 GitHub: https://github.com/username
+📌 GitHub: https://github.com/PywesS
 
 ## Setup
 ```bash
