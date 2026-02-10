@@ -31,17 +31,19 @@
 
 -Creating responsive layouts using Tailwind CSS
 
+👤 Author
+PywesS
+Frontend Developer
+📌 GitHub: https://github.com/username
+
 ## Setup
-🔑 Environment Variables
-This project uses environment variables for API security.
--VITE_TMDB_API_KEY=your_api_key_here
 ```bash
 git clone https://github.com/username/movie-app.git
 cd movie-app
 npm install
 npm run dev
 
-👤 Author
-PywesS
-Frontend Developer
-📌 GitHub: https://github.com/username
+//This project uses environment variables for API security.
+-VITE_TMDB_API_KEY=your_api_key_here
+
+
