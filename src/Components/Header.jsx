@@ -17,11 +17,11 @@ function Header() {
       icon: MdLocalMovies,
     },
     {
-      name: "Shows",
+      name: "Popular",
       icon: TbDeviceTvOld,
     },
     {
-      name: "Top Rated",
+      name: "Genres",
       icon: FaStar,
     },
   ];

@@ -20,7 +20,7 @@ function TrendingMovies() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <section id="trendMovies" className="w-full mt-20">
+    <section id="Popular" className="w-full mt-30">
       {/* Title and Buttons */}
       <div className="w-[85%] mx-auto flex  justify-between gap-6">
         <div className="w-full">
@@ -50,7 +50,7 @@ function TrendingMovies() {
       {/* Card Slider */}
       <div className="w-[85%] mx-auto mt-10 mb-20">
         <Swiper
-          spaceBetween={30}
+          spaceBetween={35}
           slidesPerView={`auto`}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {

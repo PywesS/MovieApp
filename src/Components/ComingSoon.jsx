@@ -17,7 +17,7 @@ function ComingSoon() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
-    <section id="comingSoonMovies" className="w-full mt-20">
+    <section id="Movies" className="w-full mt-30">
       <div className="w-[85%] mx-auto flex  justify-between gap-6">
         <div className="w-full">
           <h2 className="w-50 xl:w-full text-white text-lg md:text-xl lg:text-3xl xl:text-3.5xl font-extrabold">
@@ -44,7 +44,7 @@ function ComingSoon() {
       </div>
       <div className="w-[85%] mx-auto mt-10 mb-20">
         <Swiper
-          spaceBetween={30}
+          spaceBetween={35}
           slidesPerView={`auto`}
           modules={[Navigation]}
           onBeforeInit={(swiper) => {

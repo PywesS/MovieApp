@@ -24,6 +24,7 @@ function Slider() {
 
   return (
     <Swiper
+      id="Home"
       className="w-full h-screen"
       modules={[Autoplay, Pagination]}
       slidesPerView={1}
