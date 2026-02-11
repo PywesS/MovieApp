@@ -80,7 +80,7 @@ function Footer() {
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
           <p>
-            © 2025 PywesS. Powered by{" "}
+            © 2026 PywesS. Powered by{" "}
             <span className="text-[#008BFF]">TMDB API</span>
           </p>
           <ul className="flex gap-6">
