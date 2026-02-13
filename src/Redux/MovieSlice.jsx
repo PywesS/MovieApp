@@ -10,6 +10,8 @@ const initialState = {
   topratedMovies: [],
   movieCasts: {},
   genres: [],
+  searchMovies: [],
+  loading: false,
 };
 
 export const getPopularMovies = createAsyncThunk(
@@ -73,7 +75,7 @@ export const getGenres = createAsyncThunk("getGenres", async () => {
 });
 
 export const getAllMovies = createAsyncThunk("getAllMovies", async () => {
-  const pages = [4,5];
+  const pages = [4, 5];
 
   const responses = await Promise.all(
     pages.map((p) =>
@@ -89,6 +91,23 @@ export const getAllMovies = createAsyncThunk("getAllMovies", async () => {
   const results = responses.flatMap((res) => res.data.results);
   return results;
 });
+
+export const getMoviesByName = createAsyncThunk(
+  "getMoviesByName",
+  async (query) => {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?query=${query}`,
+      {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+          accept: "application/json",
+        },
+      },
+    );
+
+    return response.data.results.slice(0,5);
+  },
+);
 
 export const MovieSlice = createSlice({
   name: "movies",
@@ -122,6 +141,14 @@ export const MovieSlice = createSlice({
 
     builder.addCase(getAllMovies.fulfilled, (state, action) => {
       state.allMovies.push(...action.payload);
+    });
+
+    builder.addCase(getMoviesByName.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getMoviesByName.fulfilled, (state, action) => {
+      state.loading = false;
+      state.searchMovies = action.payload;
     });
   },
 });

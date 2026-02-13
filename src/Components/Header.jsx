@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaHome, FaStar } from "react-icons/fa";
 import { MdLocalMovies } from "react-icons/md";
 import { TbDeviceTvOld } from "react-icons/tb";
 import { IoMenu, IoClose, IoSearchOutline } from "react-icons/io5";
 import NavItems from "./NavItems";
+import { useDispatch, useSelector } from "react-redux";
+import { getMoviesByName } from "../Redux/MovieSlice";
+import SearchMovieCard from "./SearchMovieCard";
 
 function Header() {
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
+  const [mobileQuery, setMobileQuery] = useState("");
+  const { loading, searchMovies } = useSelector((state) => state.Movies);
   const [isOpen, setIsOpen] = useState(false);
   const navMenus = [
     {
@@ -26,6 +33,18 @@ function Header() {
     },
   ];
 
+  const activeQuery = isOpen ? mobileQuery : query;
+
+  useEffect(() => {
+    if (!activeQuery.trim()) return;
+
+    const timeout = setTimeout(() => {
+      dispatch(getMoviesByName(activeQuery));
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [activeQuery]);
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 ">
       {/* Header Up */}
@@ -40,10 +59,10 @@ function Header() {
             {navMenus.map((item) => (
               <NavItems key={item.name} name={item.name} />
             ))}
-          </nav> 
+          </nav>
         </div>
 
-        <div className="relative flex items-center ">
+        <div className="relative flex items-center flex-col">
           <input
             type="text"
             placeholder="Search a movie"
@@ -63,9 +82,11 @@ function Header() {
                   focus:ring-[#008BFF]
                   transition-all
                   "
+            value={query}
+            onChange={(e) => setQuery(e.target.value.toLowerCase())}
           />
 
-          <IoSearchOutline className="absolute right-3 text-xl text-gray-300 cursor-pointer hidden lg:block" />
+          <IoSearchOutline className="absolute right-3 text-xl top-2 text-gray-300 cursor-pointer hidden lg:block" />
           {/* Menu Icons */}
           {isOpen ? (
             <IoClose
@@ -82,8 +103,14 @@ function Header() {
               }}
             />
           )}
+
+          <div className="absolute z-50 left-0 top-20 rounded-2xl">
+            {query.trim() !== "" &&
+              searchMovies?.map((movie) => <SearchMovieCard info={movie} />)}
+          </div>
         </div>
       </div>
+
       {/* Header down */}
       {/* Mobile Nav */}
       <nav
@@ -105,8 +132,15 @@ function Header() {
             type="text"
             placeholder="Search a movie"
             className="bg-white/10 text-white placeholder:text-gray-400 w-full py-2 px-10 rounded-full outline-none focus:ring-1 focus:ring-[#008BFF]"
+            value={mobileQuery}
+            onChange={(e) => setMobileQuery(e.target.value.toLowerCase())}
           />
           <IoSearchOutline className="absolute top-1/2 -translate-y-1/2 right-5 text-xl text-gray-400 cursor-pointer" />
+
+          <div className="w-full max-h-[420px] absolute z-50 left-0 top-20 rounded-2xl overflow-y-auto ">
+            {mobileQuery.trim() !== "" &&
+              searchMovies?.map((movie) => <SearchMovieCard info={movie} />)}
+          </div>
         </div>
       </nav>
     </header>
