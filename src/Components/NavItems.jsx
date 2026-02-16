@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from "react-router-dom";
 function NavItems({ name }) {
   return (
     <div
@@ -11,7 +11,7 @@ after:h-[2px] after:w-0 after:bg-[#008BFF]
 hover:after:w-full
 after:transition-all after:duration-300  flex items-center  text-[18px] font-extralight tracking-wide  transition-all duration-300 ease-in-out ml-7"
     >
-      <a href={`#${name}`}>{name}</a>
+      <Link to={`/#${name}`}>{name}</Link>
     </div>
   );
 }

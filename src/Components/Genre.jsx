@@ -17,6 +17,7 @@ function Genre() {
   useEffect(() => {
     dispatch(filterMovies(28));
   }, [allMovies]);
+
   const [selectedGenreId, setSelectedGenreId] = useState(28);
   const [selectedGenreName, setSelectedGenreName] = useState("Select Genre");
 
@@ -33,7 +34,7 @@ function Genre() {
   };
 
   return (
-    <section id= "Genres" className="w-full mt-30">
+    <section id="Genres" className="w-full mt-30">
       <div className="w-[85%] mx-auto">
         <div className="flex justify-between items-center">
           <div>

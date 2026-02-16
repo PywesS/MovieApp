@@ -1,6 +1,8 @@
 import React from "react";
 import { IoIosStar } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 function MovieCard({ movieInfo }) {
+  const navigation = useNavigate();
   return (
     <div className="w-70 relative group cursor-pointer mt-10 xl:mt-0">
       <img
@@ -55,6 +57,7 @@ function MovieCard({ movieInfo }) {
   text-blue-400 text-sm
   hover:bg-blue-500/15 hover:text-white
   transition cursor-pointer"
+          onClick={() => navigation(`/movie-details/${movieInfo.id}`)}
         >
           View Details →
         </button>

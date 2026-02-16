@@ -8,6 +8,7 @@ const initialState = {
   ComingSoonMovies: [],
   popularMovies: [],
   topratedMovies: [],
+  movieById: {},
   movieCasts: {},
   genres: [],
   searchMovies: [],
@@ -105,9 +106,19 @@ export const getMoviesByName = createAsyncThunk(
       },
     );
 
-    return response.data.results.slice(0,5);
+    return response.data.results.slice(0, 5);
   },
 );
+
+export const getMovieById = createAsyncThunk("getMovieById", async (id) => {
+  const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+      accept: "application/json",
+    },
+  });
+  return response.data;
+});
 
 export const MovieSlice = createSlice({
   name: "movies",
@@ -121,7 +132,6 @@ export const MovieSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPopularMovies.fulfilled, (state, action) => {
-      console.log(action.payload.results);
       state.popularMovies = action.payload.results;
     });
 
@@ -135,20 +145,24 @@ export const MovieSlice = createSlice({
     });
 
     builder.addCase(getGenres.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.genres = action.payload;
     });
 
     builder.addCase(getAllMovies.fulfilled, (state, action) => {
-      state.allMovies.push(...action.payload);
+      state.allMovies = action.payload;
     });
 
-    builder.addCase(getMoviesByName.pending, (state) => {
+    builder.addCase(getMoviesByName.fulfilled, (state, action) => {
+      state.searchMovies = action.payload;
+    });
+
+    builder.addCase(getMovieById.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getMoviesByName.fulfilled, (state, action) => {
+
+    builder.addCase(getMovieById.fulfilled, (state, action) => {
       state.loading = false;
-      state.searchMovies = action.payload;
+      state.movieById = action.payload;
     });
   },
 });

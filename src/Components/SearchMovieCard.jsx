@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function SearchMovieCard({ info }) {
+function SearchMovieCard({ info}) {
+  const navigate = useNavigate();
   return (
     <div className="w-full">
-      <div className="w-[300px] h-[100px] mb-3  bg-[#0F0E0E] p-3  items-center gap-7 cursor-pointer rounded-2xl border border-blue-600/50 hidden lg:flex">
+      <div className="w-[300px] h-[100px] mb-3  bg-[#0F0E0E] p-3  items-center gap-7 cursor-pointer rounded-2xl border border-blue-600/50 hidden lg:flex" onClick={()=>navigate(`movie-details/${info.id}`)} >
         <img
           className="w-12 shrink-0"
           src={`https://image.tmdb.org/t/p/w500${info.poster_path}`}
@@ -16,7 +18,7 @@ function SearchMovieCard({ info }) {
         </div>
       </div>
       {/* Mobile search movie card */}
-      <div className="lg:hidden w-[full] h-[90px] bg-slate-900 flex items-center gap-4 mb-2 p-3 rounded-xl hover:bg-slate-800 transition">
+      <div className="lg:hidden w-[full] h-[90px] bg-slate-900 flex items-center gap-4 mb-2 p-3 rounded-xl hover:bg-slate-800 transition" onClick={()=>navigate(`movie-details/${info.id}`)}>
         <img
           className="w-14 h-20 object-cover rounded-md"
           src={`https://image.tmdb.org/t/p/w200${info.poster_path}`}

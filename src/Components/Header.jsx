@@ -84,6 +84,7 @@ function Header() {
                   "
             value={query}
             onChange={(e) => setQuery(e.target.value.toLowerCase())}
+           
           />
 
           <IoSearchOutline className="absolute right-3 text-xl top-2 text-gray-300 cursor-pointer hidden lg:block" />
@@ -93,6 +94,7 @@ function Header() {
               className="text-2xl text-white cursor-pointer hover:text-[#008BFF]transition-colors lg:hidden"
               onClick={() => {
                 setIsOpen(false);
+                setMobileQuery("");
               }}
             />
           ) : (
