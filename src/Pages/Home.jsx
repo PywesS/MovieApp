@@ -4,6 +4,7 @@ import TrendingMovies from "../Components/TrendingMovies";
 import ComingSoon from "../Components/ComingSoon";
 import Genre from "../Components/Genre";
 import Footer from "../Components/Footer";
+import MovieTrailer from "../Components/MovieTrailer";
 
 function Home() {
   return (

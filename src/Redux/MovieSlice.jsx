@@ -13,6 +13,8 @@ const initialState = {
   genres: [],
   searchMovies: [],
   loading: false,
+  trailer: {},
+  trailerIsOpen: false,
 };
 
 export const getPopularMovies = createAsyncThunk(
@@ -120,6 +122,23 @@ export const getMovieById = createAsyncThunk("getMovieById", async (id) => {
   return response.data;
 });
 
+export const getTrailerById = createAsyncThunk("getTrailerById", async (id) => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/videos`,
+    {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+        accept: "application/json",
+      },
+    },
+  );
+
+  const trailer = response.data.results.find(
+    (video) => video.type === "Trailer" && video.site === "YouTube",
+  );
+  return trailer || null;
+});
+
 export const MovieSlice = createSlice({
   name: "movies",
   initialState,
@@ -128,6 +147,10 @@ export const MovieSlice = createSlice({
       state.filteredMovies = state.allMovies.filter((movie) =>
         movie.genre_ids?.includes(action.payload),
       );
+    },
+
+    setIsTrailerOpen: (state, action) => {
+      state.trailerIsOpen = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -164,9 +187,13 @@ export const MovieSlice = createSlice({
       state.loading = false;
       state.movieById = action.payload;
     });
+
+    builder.addCase(getTrailerById.fulfilled, (state, action) => {
+      state.trailer = action.payload;
+    });
   },
 });
 
-export const { filterMovies } = MovieSlice.actions;
+export const { filterMovies ,setIsTrailerOpen } = MovieSlice.actions;
 
 export default MovieSlice.reducer;

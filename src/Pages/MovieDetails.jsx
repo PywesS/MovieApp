@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getMovieById, getMovieCastById } from "../Redux/MovieSlice";
+import { getMovieById, getMovieCastById, setIsTrailerOpen } from "../Redux/MovieSlice";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoIosStar } from "react-icons/io";
 import {
@@ -10,9 +10,10 @@ import {
   IoPlayOutline,
   IoAddCircleOutline,
 } from "react-icons/io5";
+import MovieTrailer from "../Components/MovieTrailer";
 function MovieDetails() {
   const { id } = useParams();
-  const { movieCasts, movieById, loading } = useSelector(
+  const { movieCasts, movieById, loading} = useSelector(
     (state) => state.Movies,
   );
 
@@ -34,7 +35,7 @@ function MovieDetails() {
   }, [id, dispatch]);
 
   return (
-    <div className="w-full h-[calc(100vh-80px)] mt-50 md:mt-20 text-white flex justify-center items-center">
+    <div className="w-full h-[calc(100vh-80px)] mt-50 md:mt-20 text-white flex justify-center items-center relative">
       {/* Movie Details Container */}
 
       {loading ? (
@@ -93,6 +94,7 @@ function MovieDetails() {
               bg-blue-600 rounded-xl flex items-center justify-center gap-2
               hover:bg-blue-600/80 transition-all duration-200 ease-in 
                 hover:-translate-y-1 text-sm sm:text-base cursor-pointer"
+                onClick={()=>dispatch(setIsTrailerOpen(true))}
                 >
                   <IoPlayOutline className="text-lg" />
                   Watch Now
@@ -114,6 +116,8 @@ function MovieDetails() {
           </div>
         </div>
       )}
+
+      <MovieTrailer id ={id}/>
     </div>
   );
 }
